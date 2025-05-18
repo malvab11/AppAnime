@@ -4,11 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.streamingapp.screens.LoginScreen
-import com.example.streamingapp.screens.RegisterScreen
+import androidx.activity.viewModels
+import com.example.streamingapp.ui.screens.home.HomeScreen
+import com.example.streamingapp.ui.screens.home.SearchAnimeScreen
+import com.example.streamingapp.ui.screens.home.viewModels.HomeViewModel
 import com.example.streamingapp.ui.theme.StreamingAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val homeViewModel : HomeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -17,7 +24,9 @@ class MainActivity : ComponentActivity() {
 //                LoadingScreen()
 //                PresentationScreen()
 //                LoginScreen()
-                RegisterScreen()
+//                RegisterScreen()
+                HomeScreen(homeViewModel = homeViewModel)
+//                SearchAnimeScreen()
             }
         }
     }

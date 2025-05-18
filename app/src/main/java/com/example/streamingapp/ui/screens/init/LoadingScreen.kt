@@ -1,4 +1,4 @@
-package com.example.streamingapp.screens
+package com.example.streamingapp.ui.screens.init
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,10 +11,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.streamingapp.R
-import com.example.streamingapp.screens.commons.CommonCircularProgress
-import com.example.streamingapp.screens.commons.CommonImage
-import com.example.streamingapp.screens.commons.CommonText
-import com.example.streamingapp.screens.commons.CommonTextNameApp
+import com.example.streamingapp.ui.screens.commons.CommonCircularProgress
+import com.example.streamingapp.ui.screens.commons.CommonImage
+import com.example.streamingapp.ui.screens.commons.CommonText
+import com.example.streamingapp.ui.screens.commons.CommonTextNameApp
 
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier) {

@@ -1,0 +1,12 @@
+package com.example.streamingapp.domain.useCases
+
+import com.example.streamingapp.data.repository.AppRepository
+import javax.inject.Inject
+
+class AppUseCases @Inject constructor(private val useServices : AppRepository) {
+
+    suspend fun getTopAnimes(filter : String) = useServices.getTopAnimes(filter = filter)
+    suspend fun getNewEpisodes() = useServices.getNewEpisodes()
+    suspend fun getTopMangas(filter: String) = useServices.getTopMangas(filter = filter)
+
+}
