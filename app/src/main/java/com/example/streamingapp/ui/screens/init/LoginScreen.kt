@@ -13,6 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.streamingapp.R
 import com.example.streamingapp.ui.screens.commons.CommonImage
 import com.example.streamingapp.ui.screens.commons.CommonOutlinedButtons
@@ -22,7 +23,7 @@ import com.example.streamingapp.ui.screens.commons.CommonTextNameApp
 import com.example.streamingapp.ui.screens.commons.LoginTextField
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(modifier: Modifier = Modifier, navController: NavHostController) {
     Box(modifier = modifier.fillMaxSize()) {
 
         // Fondo con imagen

@@ -2,6 +2,7 @@ package com.example.streamingapp.data.network
 
 import com.example.streamingapp.data.models.GenericAnime
 import com.example.streamingapp.data.models.GenericEpisodes
+import com.example.streamingapp.data.models.Genres
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,6 +17,7 @@ interface ApiCliente {
         @Query("page") page: Int? = null,
         @Query("limit") limit: Int? = null
     ): Response<GenericAnime>
+
     @GET("top/manga")
     suspend fun getTopMangas(
         @Query("type") type: String? = null,
@@ -23,6 +25,10 @@ interface ApiCliente {
         @Query("page") page: Int? = null,
         @Query("limit") limit: Int? = null
     ): Response<GenericAnime>
+
     @GET("watch/episodes")
     suspend fun getNewEpisodes(): Response<GenericEpisodes>
+
+    @GET("genres/anime")
+    suspend fun getGenres(): Response<Genres>
 }

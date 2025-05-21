@@ -66,6 +66,9 @@ dependencies {
     //Imagenes URL
     implementation("io.coil-kt:coil-compose:2.4.0")
 
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
+
     implementation(libs.androidx.media3.common.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -5,8 +5,9 @@ import javax.inject.Inject
 
 class AppUseCases @Inject constructor(private val useServices : AppRepository) {
 
-    suspend fun getTopAnimes(filter : String) = useServices.getTopAnimes(filter = filter)
+    suspend fun getTopAnimes(filter : String, type: String?) = useServices.getTopAnimes(filter = filter, type = type)
     suspend fun getNewEpisodes() = useServices.getNewEpisodes()
     suspend fun getTopMangas(filter: String) = useServices.getTopMangas(filter = filter)
+    suspend fun getGenres() = useServices.getGenres()
 
 }

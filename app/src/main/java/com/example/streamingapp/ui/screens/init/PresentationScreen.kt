@@ -1,6 +1,7 @@
 package com.example.streamingapp.ui.screens.init
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,7 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.streamingapp.R
+import com.example.streamingapp.data.Screens
 import com.example.streamingapp.ui.screens.commons.CommonImage
 import com.example.streamingapp.ui.screens.commons.CommonOutlinedButtons
 import com.example.streamingapp.ui.screens.commons.CommonSpacer
@@ -23,16 +26,16 @@ import com.example.streamingapp.ui.screens.commons.CommonText
 import com.example.streamingapp.ui.screens.commons.CommonTextNameApp
 
 @Composable
-fun PresentationScreen(modifier: Modifier = Modifier) {
+fun PresentationScreen(modifier: Modifier = Modifier, navController: NavHostController) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
         Fondo(modifier = Modifier.fillMaxSize())
         FondoDegradado()
-        FooterPresentation()
+        FooterPresentation(navController)
     }
 }
 
 @Composable
-fun FondoDegradado() {
+private fun FondoDegradado() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +51,7 @@ fun FondoDegradado() {
 }
 
 @Composable
-fun FooterPresentation() {
+private fun FooterPresentation(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,15 +60,15 @@ fun FooterPresentation() {
     ) {
         CabeceraFooter()
         CommonSpacer(size = 12)
-        BottonesFooter()
+        BottonesFooter(navController)
         CommonSpacer(size = 12)
-        TextoFooter()
+        TextoFooter(navController)
 
     }
 }
 
 @Composable
-fun TextoFooter() {
+private fun TextoFooter(navController: NavHostController) {
     Row {
         CommonText(
             modifier = Modifier,
@@ -75,7 +78,7 @@ fun TextoFooter() {
         )
         CommonSpacer(size = 5)
         CommonText(
-            modifier = Modifier,
+            modifier = Modifier.clickable { navController.navigate(Screens.RegisterScreen.ruta) },
             text = "Crear una cuenta",
             color = Color(0xFFAD0101),
             fontWeight = FontWeight.Bold,
@@ -85,21 +88,21 @@ fun TextoFooter() {
 }
 
 @Composable
-fun BottonesFooter() {
+private fun BottonesFooter(navController: NavHostController) {
     CommonOutlinedButtons(
         texto = "INGRESA COMO INVITADO"
-    ) { }
+    ) { navController.navigate(Screens.HomeScreen.ruta) }
 
     CommonSpacer(size = 5)
     CommonOutlinedButtons(
         texto = "INICIAR SESIÓN",
         containterColor = Color.Transparent,
         borderColor = Color(0xFFAD0101)
-    ) { }
+    ) { navController.navigate(Screens.LoginScreen.ruta) }
 }
 
 @Composable
-fun CabeceraFooter() {
+private fun CabeceraFooter() {
     CommonTextNameApp(
         modifier = Modifier
     )
@@ -113,7 +116,7 @@ fun CabeceraFooter() {
 }
 
 @Composable
-fun Fondo(modifier: Modifier) {
+private fun Fondo(modifier: Modifier) {
     CommonImage(
         modifier = modifier,
         imageSource = R.drawable.ic_fondo,
