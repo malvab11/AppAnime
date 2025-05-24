@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.StreamingApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.StreamingApp" parent="Theme.SplashScreen" >
+        <item name="windowSplashScreenBackground" >#191A1F</item>
+        <item name="windowSplashScreenAnimatedIcon" >@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenIconBackgroundColor" >@color/white</item>
+        <item name="postSplashScreenTheme" >@android:style/Theme.Material.NoActionBar</item>
+    </style>
 </resources>

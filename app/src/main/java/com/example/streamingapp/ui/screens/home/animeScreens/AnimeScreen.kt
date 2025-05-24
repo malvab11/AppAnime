@@ -1,7 +1,10 @@
-package com.example.streamingapp.ui.screens.home
+package com.example.streamingapp.ui.screens.home.animeScreens
 
 import android.annotation.SuppressLint
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,8 +29,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.streamingapp.data.Screens
+import com.example.streamingapp.data.models.Anime
 import com.example.streamingapp.data.models.GenericAnime
 import com.example.streamingapp.data.models.GenericEpisodes
 import com.example.streamingapp.ui.screens.commons.CommonText
@@ -41,7 +48,8 @@ fun AnimesScreen(
     modifier: Modifier = Modifier,
     padding: PaddingValues,
     animesViewModel: AnimesViewModel,
-    pantallaIndex: Int
+    pantallaIndex: Int,
+    navController: NavHostController
 ) {
     LaunchedEffect(Unit) {
         animesViewModel.loadDataForScreen(pantallaIndex)
@@ -60,14 +68,25 @@ fun AnimesScreen(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
         ) {
-            Body(animes = animes, mangas = mangas, episodios = episodios)
+            Body(
+                animes = animes,
+                mangas = mangas,
+                episodios = episodios,
+                navController = navController
+            )
         }
     }
 }
 
 
 @Composable
-private fun Body(animes: GenericAnime?, episodios: GenericEpisodes?, mangas: GenericAnime?) {
+private fun Body(
+    animes: GenericAnime?,
+    episodios: GenericEpisodes?,
+    mangas: GenericAnime?,
+    navController: NavHostController
+) {
+    val context = LocalContext.current
     CommonWebImages(
         model = animes?.data?.get(0)?.images?.webp?.imageUrl,
         contentDescription = animes?.data?.get(0)?.title,
@@ -83,7 +102,14 @@ private fun Body(animes: GenericAnime?, episodios: GenericEpisodes?, mangas: Gen
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(items = animes?.data?.take(5) ?: emptyList()) { anime ->
-            CardView(imagen = anime.images.webp.imageUrl, titulo = anime.title)
+            CardView(
+                imagen = anime.images.webp.imageUrl,
+                titulo = anime.title,
+                animeId = anime
+            ) {
+                navController.navigate(Screens.AnimeDetailScreen.createRuta(animeId = it))
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -94,7 +120,13 @@ private fun Body(animes: GenericAnime?, episodios: GenericEpisodes?, mangas: Gen
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(items = episodios?.data?.take(5) ?: emptyList()) { episodio ->
-            CardView(imagen = episodio.entry.images.webp.imageUrl, titulo = episodio.entry.title)
+            CardView(
+                imagen = episodio.entry.images.webp.imageUrl,
+                titulo = episodio.entry.title,
+                animeId = null
+            ) {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -105,17 +137,27 @@ private fun Body(animes: GenericAnime?, episodios: GenericEpisodes?, mangas: Gen
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(items = mangas?.data?.take(5) ?: emptyList()) { mangas ->
-            CardView(imagen = mangas.images.webp.imageUrl, titulo = mangas.title)
+            CardView(imagen = mangas.images.webp.imageUrl, titulo = mangas.title, animeId = null) {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
 
 @Composable
-private fun CardView(imagen: String?, titulo: String?) {
+private fun CardView(
+    imagen: String?,
+    titulo: String?,
+    animeId: Anime?,
+    onItemSelected: (Int) -> Unit
+) {
     Column(
         modifier = Modifier
             .width(150.dp)
-            .height(250.dp),
+            .height(250.dp)
+            .clickable {
+                onItemSelected(animeId!!.malId)
+            },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CommonWebImages(

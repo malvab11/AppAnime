@@ -12,7 +12,13 @@ data class Anime(
     val title: String,
     val episodes: Int?,
     val score: Float?,
-    val images: AnimeImages
+    val images: AnimeImages,
+    val genres: List<GenresNew>,
+    val synopsis: String,
+)
+
+data class GenresNew(
+    val name: String
 )
 
 data class AnimeImages(

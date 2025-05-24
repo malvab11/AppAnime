@@ -3,8 +3,11 @@ package com.example.streamingapp.data.network
 import com.example.streamingapp.data.models.GenericAnime
 import com.example.streamingapp.data.models.GenericEpisodes
 import com.example.streamingapp.data.models.Genres
+import com.example.streamingapp.data.models.UnicAnime
+import com.example.streamingapp.data.models.UnicEpisodes
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiCliente {
@@ -31,4 +34,10 @@ interface ApiCliente {
 
     @GET("genres/anime")
     suspend fun getGenres(): Response<Genres>
+
+    @GET("anime/{id}")
+    suspend fun getAnimeById(@Path("id") animeId: Int): Response<UnicAnime>
+
+    @GET("anime/{id}/videos")
+    suspend fun getAnimeVideos(@Path("id") animeId: Int): Response<UnicEpisodes>
 }

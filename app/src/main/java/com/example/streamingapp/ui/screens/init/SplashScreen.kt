@@ -57,7 +57,7 @@ fun SplashScreen(
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(Color(0xff191A1F))
     ) {
         val (image, nameApp, circularProgress, powered) = createRefs()
         CommonImage(

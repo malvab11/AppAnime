@@ -55,6 +55,8 @@ dependencies {
     //Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation (libs.logging.interceptor)
+
 
     //Dagger Hilt
     implementation(libs.hilt.android.v250)
@@ -64,10 +66,13 @@ dependencies {
     implementation(libs.constraintlayout)
 
     //Imagenes URL
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.coil.compose)
 
     //Navigation
     implementation(libs.androidx.navigation.compose)
+
+    //SplashScreen
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.androidx.media3.common.ktx)
     testImplementation(libs.junit)

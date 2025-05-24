@@ -50,12 +50,13 @@ fun CommonTextNameApp(modifier: Modifier, color: Color = Color.White, fontSize: 
 
 @Composable
 fun CommonText(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     text: String,
     color: Color = Color.White,
     fontWeight: FontWeight = FontWeight.Normal,
     fontSize: Int,
-    textAlign: TextAlign = TextAlign.Center
+    textAlign: TextAlign = TextAlign.Center,
+    maxLines : Int = 1
 ) {
     Text(
         text = text,
@@ -64,7 +65,7 @@ fun CommonText(
         fontSize = fontSize.sp,
         modifier = modifier,
         textAlign = textAlign,
-        maxLines = 1,
+        maxLines = maxLines,
         overflow = TextOverflow.Ellipsis
     )
 }
@@ -96,26 +97,25 @@ fun CommonWebImages(model: String? = "", contentDescription: String? = "", conte
 
 @Composable
 fun CommonOutlinedButtons(
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    modifier: Modifier = Modifier,
     texto: String,
     containterColor: Color = Color(0xFFAD0101),
     borderColor: Color = Color.Transparent,
     onClick: () -> Unit
 ) {
     OutlinedButton(
-        onClick = { onClick() },
+        onClick = onClick,
+        modifier = modifier,
         colors = ButtonDefaults.outlinedButtonColors(containerColor = containterColor),
-        border = BorderStroke(width = 1.dp, color = borderColor)
+        border = BorderStroke(1.dp, borderColor)
     ) {
         CommonText(
-            modifier = modifier,
             text = texto,
             fontWeight = FontWeight.Bold,
             fontSize = 12
         )
     }
 }
-
 @Composable
 fun CommonCircularProgress(modifier: Modifier) {
     CircularProgressIndicator(
@@ -132,12 +132,12 @@ fun CommonSpacer(modifier: Modifier = Modifier, size: Int) {
 
 @Composable
 fun Section(title: String, title2: String = "Ver Todos") {
-    CommonSpacer(size = 10)
+    CommonSpacer(size = 15)
     Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),horizontalArrangement = Arrangement.SpaceBetween) {
         CommonText(modifier = Modifier, text = title, fontSize = 18, fontWeight = FontWeight.Bold)
         CommonText(modifier = Modifier, text = title2, fontSize = 15, fontWeight = FontWeight.Bold, color = Color.Red)
     }
-    CommonSpacer(size = 10)
+    CommonSpacer(size = 15)
 }
 
 @Composable

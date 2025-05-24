@@ -24,13 +24,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.streamingapp.R
 import com.example.streamingapp.ui.screens.commons.CommonImage
 import com.example.streamingapp.ui.screens.commons.CommonText
+import com.example.streamingapp.ui.screens.home.animeScreens.AnimesScreen
 import com.example.streamingapp.ui.screens.home.viewModels.AnimesViewModel
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, animesViewModel: AnimesViewModel) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    animesViewModel: AnimesViewModel,
+    navController: NavHostController
+) {
 
     var pantalla by rememberSaveable { mutableStateOf(0) }
 
@@ -43,9 +49,9 @@ fun HomeScreen(modifier: Modifier = Modifier, animesViewModel: AnimesViewModel) 
     ) { padding ->
 
         when (pantalla) {
-            0 -> AnimesScreen(pantallaIndex = 0, padding = padding, animesViewModel = animesViewModel)
+            0 -> AnimesScreen(navController = navController,pantallaIndex = 0, padding = padding, animesViewModel = animesViewModel)
             1 -> NavigatorScreen(pantallaIndex = 1,padding = padding, animesViewModel = animesViewModel)
-            2 -> FavoriteScreen()
+            2 -> FavoriteScreen(padding = padding)
             3 -> ProfileScreen()
         }
     }

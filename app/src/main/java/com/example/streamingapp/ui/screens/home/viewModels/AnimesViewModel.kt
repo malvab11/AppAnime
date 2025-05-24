@@ -47,10 +47,9 @@ class AnimesViewModel @Inject constructor(private val useCases: AppUseCases) : V
 
     fun callAnimes() {
         viewModelScope.launch {
-            val responseAnimes = useCases.getTopAnimes(filter = "bypopularity", type = "")
+            val responseAnimes = useCases.getTopAnimes(filter = "bypopularity", type = "tv")
             if (responseAnimes.data.isNotEmpty()) {
                 _animes.value = responseAnimes
-                Log.i("Animes", _animes.value.toString())
             } else {
                 Log.i("Animes", "error")
             }
@@ -62,7 +61,6 @@ class AnimesViewModel @Inject constructor(private val useCases: AppUseCases) : V
             val responseEpisodios = useCases.getNewEpisodes()
             if (responseEpisodios.data.isNotEmpty()) {
                 _episodios.value = responseEpisodios
-                Log.i("Capitulos", _episodios.value.toString())
             } else {
                 Log.i("Capitulos", "error")
             }
@@ -74,7 +72,6 @@ class AnimesViewModel @Inject constructor(private val useCases: AppUseCases) : V
             val responseGenres = useCases.getGenres()
             if (responseGenres.data.isNotEmpty()) {
                 _genres.value = responseGenres
-                Log.i("Genres", _genres.value.toString())
             } else {
                 Log.i("Genres", "error")
             }
@@ -86,7 +83,6 @@ class AnimesViewModel @Inject constructor(private val useCases: AppUseCases) : V
             val responseMovies = useCases.getTopAnimes(filter = "bypopularity", type = "movie")
             if (responseMovies.data.isNotEmpty()) {
                 _movies.value = responseMovies
-                Log.i("Movies", _movies.value.toString())
             } else {
                 Log.i("Movies", "error")
             }
@@ -98,7 +94,6 @@ class AnimesViewModel @Inject constructor(private val useCases: AppUseCases) : V
             val responseMangas = useCases.getTopMangas(filter = "bypopularity")
             if (responseMangas.data.isNotEmpty()) {
                 _mangas.value = responseMangas
-                Log.i("Mangas", _mangas.value.toString())
             } else {
                 Log.i("Mangas", "error")
             }
